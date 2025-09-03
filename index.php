@@ -28,6 +28,7 @@
 
     <button class="btn" onclick="paris(<?php echo $argent; ?>)"> Parier </button>
     <button class="btn" onclick="miniJeu(<?php echo $argent; ?>)"> mini jeu </button>
+    <button class="btn" onclick="blackJack(<?php echo $argent; ?>)"> black jack </button>
 
     <script>
         function paris(argent) {
@@ -36,6 +37,10 @@
 
         function miniJeu(argent) {
             window.location.href = 'miniJeu.php?argent=' + encodeURIComponent(argent);
+        }
+
+        function blackJack(argent) {
+            window.location.href = 'blackJack.php?argent=' + encodeURIComponent(argent);
         }
     </script>
 

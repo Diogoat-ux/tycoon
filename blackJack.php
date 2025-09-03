@@ -8,7 +8,40 @@ if (isset($_GET['argent'])) {
 
 <p id="solde">Vous avez <?php echo $argent; ?> frs</p>
 
+<button class="btn" id="btnTirer" onclick="tirer()"> tirer </button>
+<button class="btn" id="btnRester" onclick="rester()"> rester </button>
+<button class="btn" id="btnReset" onclick="reset()"> recommencer </button>
+<button class="btn" id="btnAccueil" onclick="accueil()"> accueil </button>
+
 <script>
+    var bouton = document.getElementById('btnRester');
+    bouton.style.display = "none";
+
+    var bouton2 = document.getElementById('btnReset');
+    bouton2.style.display = "none";
+</script>
+
+<p>Vous</p>
+<p id="carte"></p>
+<div id="points">
+    <script>
+        let pts = 0;
+    </script>
+</div>
+
+
+<p>Adversaire</p>
+<p id="carteAdverse"></p>
+<div id="pointsAdverse">
+    <script>
+        let ptsAdverse = 0;
+    </script>
+</div>
+
+
+<script>
+    let argent = <?php echo $argent; ?>;
+
     let jeu = [
         // Trèfles
         {
@@ -279,5 +312,75 @@ if (isset($_GET['argent'])) {
         },
     ];
 
+
     jeu = shuffle(jeu);
+
+
+    function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]]; // échange
+        }
+        return array;
+    }
+
+    function tirer() {
+        var bouton = document.getElementById('btnRester');
+        bouton.style.display = "block";
+
+        var bouton2 = document.getElementById('btnReset');
+        bouton2.style.display = "block";
+        //pour le joueur
+        let index = Math.floor(Math.random() * jeu.length);
+        let carte = jeu[index];
+        document.getElementById("carte").innerHTML += "Vous avez tiré : " + carte.nom + "<br>";
+        pts += carte.points;
+        document.getElementById("points").innerHTML = "Vous avez : " + pts + " points <br>";
+        jeu.splice(index, 1);
+        console.log(jeu);
+        if (pts > 21) {
+            alert("T'as perdu");
+        }
+
+        //pour l'adversaire
+        let index2 = Math.floor(Math.random() * jeu.length);
+        let carte2 = jeu[index];
+        document.getElementById("carteAdverse").innerHTML += "L'adversaire a tiré : " + carte2.nom + "<br>";
+        ptsAdverse += carte2.points;
+        document.getElementById("pointsAdverse").innerHTML = "L'adversaire a : " + ptsAdverse + " points <br>";
+        jeu.splice(index2, 1);
+        console.log(jeu);
+        if (ptsAdverse > 21) {
+            alert("T'as gagné");
+            argent += 20;
+            document.getElementById("solde").innerText = "Vous avez " + argent + " frs";
+        }
+    }
+
+    function rester() {
+        var bouton = document.getElementById('btnTirer');
+        bouton.style.display = "none";
+
+        if (pts > ptsAdverse) {
+            alert("T'as gagné");
+            argent += 20;
+            document.getElementById("solde").innerText = "Vous avez " + argent + " frs";
+        } else {
+            alert("T'as perdu");
+        }
+        window.location.href = 'blackJack.php?argent=' + encodeURIComponent(argent);
+    }
+
+    function reset() {
+        var bouton = document.getElementById('btnTirer');
+        bouton.style.display = "none";
+        window.location.href = 'blackJack.php?argent=' + encodeURIComponent(argent);
+
+
+    }
+
+    function accueil() {
+        // utilise la variable JS mise à jour
+        window.location.href = 'index.php?argent=' + encodeURIComponent(argent);
+    }
 </script>

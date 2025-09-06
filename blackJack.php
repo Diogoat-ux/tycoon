@@ -366,7 +366,7 @@ if (isset($_GET['argent'])) {
             argent += 20;
             document.getElementById("solde").innerText = "Vous avez " + argent + " frs";
         } else {
-            alert("T'as perdu");
+            alert("T'as perdu nullos");
         }
         window.location.href = 'blackJack.php?argent=' + encodeURIComponent(argent);
     }

@@ -1,0 +1,14 @@
+.btn{
+    font-family: 'Nunito', sans-serif;
+    font-size: 20px;
+    padding: 14px 32px;
+    margin: 15px;
+    color: #fff;
+    background: linear-gradient(145deg, #638733, #453d9e);
+    border: 2px solid #5effcc;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(255, 142, 163, 0.4);
+    position: relative;
+}

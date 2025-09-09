@@ -361,7 +361,7 @@ if (isset($_GET['argent'])) {
         var bouton = document.getElementById('btnTirer');
         bouton.style.display = "none";
 
-        if (pts > ptsAdverse) {
+        if (pts > ptsAdverse && pts <= 21) {
             alert("T'as gagné");
             argent += 20;
             document.getElementById("solde").innerText = "Vous avez " + argent + " frs";
